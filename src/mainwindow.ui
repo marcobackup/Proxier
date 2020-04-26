@@ -38,7 +38,7 @@
     <property name="geometry">
      <rect>
       <x>-26</x>
-      <y>6</y>
+      <y>4</y>
       <width>241</width>
       <height>151</height>
      </rect>
@@ -103,7 +103,7 @@
     <property name="geometry">
      <rect>
       <x>61</x>
-      <y>160</y>
+      <y>158</y>
       <width>71</width>
       <height>21</height>
      </rect>
@@ -121,8 +121,8 @@
    <widget class="QPushButton" name="savebtn">
     <property name="geometry">
      <rect>
-      <x>103</x>
-      <y>207</y>
+      <x>17</x>
+      <y>238</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -150,8 +150,8 @@
    <widget class="QPushButton" name="startbtn">
     <property name="geometry">
      <rect>
-      <x>48</x>
-      <y>206</y>
+      <x>17</x>
+      <y>191</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -176,6 +176,39 @@
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QLabel" name="statuslabel">
+    <property name="geometry">
+     <rect>
+      <x>69</x>
+      <y>261</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;STATUS:&lt;/span&gt; fetching...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>180</y>
+      <width>191</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <zorder>line</zorder>
+   <zorder>label</zorder>
+   <zorder>tableWidget</zorder>
+   <zorder>label_4</zorder>
+   <zorder>savebtn</zorder>
+   <zorder>startbtn</zorder>
+   <zorder>statuslabel</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
