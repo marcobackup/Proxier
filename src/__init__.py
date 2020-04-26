@@ -5,5 +5,6 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUiType
 
 from utils.fetcher import *
+from utils.checker import *
 from queue import Queue
-import threading
+import time
