@@ -1,5 +1,8 @@
 <RCC>
   <qresource prefix="images">
+    <file>assets/favicon.ico</file>
+    <file>assets/play.PNG</file>
+    <file>assets/stop.PNG</file>
     <file>assets/save.png</file>
     <file>assets/icon.png</file>
   </qresource>

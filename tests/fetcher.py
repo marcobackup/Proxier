@@ -1,6 +1,7 @@
 
 import requests, random, re, threading, time
 from bs4 import BeautifulSoup
+from geoip import geolite2
 
 
 def get_random_site():
@@ -28,7 +29,14 @@ def check_proxy(proxy):
         )
         a = time.time()
         e = round(((a - b) * 1000))
-        print(f'{proxy} LIVE {e}ms')
+        try:
+            print(proxy.split(':')[0])
+            match = geolite2.lookup()
+            if match is None: match = None
+            else: match = match.country
+            print(f'{proxy} LIVE {e}ms - {match}')
+        except Exception as e:
+            print(e)
     except Exception:
         pass
 

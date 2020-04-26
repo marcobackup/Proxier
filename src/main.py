@@ -1,8 +1,8 @@
 
 from __init__ import *
-from table import *
 
 
+fetcher = Fetcher()
 ui, _ = loadUiType('mainwindow.ui')
 
 class Proxier(QMainWindow, ui):
@@ -20,22 +20,28 @@ class Proxier(QMainWindow, ui):
     """
     def init_UI(self):
         #model = ProxiesTable([['fwjiofw', 'wmi23o', '323', '2no3ig3oi4'], ['nn2ironio32r', 'r23nrj2390r', 'j23if2', '23fi32']], ['Address', 'Port', 'Country', 'Status'], self)
-        row = self.tableWidget.rowCount()
         self.tableWidget.horizontalHeader().hide()
         self.tableWidget.verticalHeader().hide()
-        #self.tableWidget.insertRow(row)
-        #self.tableWidget.setItem(row, 0, QTableWidgetItem('fewniofwe'))
-        #self.tableWidget.setItem(row, 1, QTableWidgetItem('fewniofwe'))
-        #self.tableWidget.setItem(row, 2, QTableWidgetItem('fewiofweio'))
-        #self.tableWidget.setItem(row, 3, QTableWidgetItem('fewiofweio'))
-
+        tool_bar = QToolBar('menuBar')
 
     """
         buttons handler
     """
     def buttons_handler(self):
-        pass
+        self.startbtn.clicked.connect(self.fetch_proxies)
 
+    def fetch_proxies(self):
+        row = self.tableWidget.rowCount()
+        proxies = []
+        th = threading.Thread(target=fetcher.fetch_proxies, args=(proxies,))
+        th.start()
+        th.join()
+        for proxy in proxies:
+            self.tableWidget.insertRow(row)
+            self.tableWidget.setItem(row, 0, QTableWidgetItem(proxy))
+            self.tableWidget.setItem(row, 1, QTableWidgetItem('fewniofwe'))
+            self.tableWidget.setItem(row, 2, QTableWidgetItem('fewiofweio'))
+            self.tableWidget.setItem(row, 3, QTableWidgetItem('checking...'))
 
     
 def main():
