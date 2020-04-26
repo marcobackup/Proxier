@@ -23,11 +23,11 @@ class Proxier(QMainWindow, ui):
         row = self.tableWidget.rowCount()
         self.tableWidget.horizontalHeader().hide()
         self.tableWidget.verticalHeader().hide()
-        self.tableWidget.insertRow(row)
-        self.tableWidget.setItem(row, 0, QTableWidgetItem('fewniofwe'))
-        self.tableWidget.setItem(row, 1, QTableWidgetItem('fewniofwe'))
-        self.tableWidget.setItem(row, 2, QTableWidgetItem('fewiofweio'))
-        self.tableWidget.setItem(row, 3, QTableWidgetItem('fewiofweio'))
+        #self.tableWidget.insertRow(row)
+        #self.tableWidget.setItem(row, 0, QTableWidgetItem('fewniofwe'))
+        #self.tableWidget.setItem(row, 1, QTableWidgetItem('fewniofwe'))
+        #self.tableWidget.setItem(row, 2, QTableWidgetItem('fewiofweio'))
+        #self.tableWidget.setItem(row, 3, QTableWidgetItem('fewiofweio'))
 
 
     """
