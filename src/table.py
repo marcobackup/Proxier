@@ -6,16 +6,14 @@ class CheckProxies(QThread):
 
     statusChanged = pyqtSignal(dict)
 
-    def __init__(self, address, port, row, parent=None):
+    def __init__(self, proxies, parent=None):
         QThread.__init__(self, parent)
-        self.address = address
-        self.port    = port
-        self.row     = row
+        self.proxies = proxies
 
     def run(self):
-        status = check_proxy(self.address, self.port)
-        time.sleep(0.1)
-        self.statusChanged.emit({'status': status, 'row': self.row})
+        for proxy in self.proxies:
+            status = check_proxy(proxy['address'], proxy['port'])
+            self.statusChanged.emit({'status': status, 'row': proxy['row']})
 
 
 class FetchProxies(QThread):
@@ -26,6 +24,6 @@ class FetchProxies(QThread):
     def run(self):
         proxies = self.fetcher.fetch_proxies()
         for proxy in proxies:
-            time.sleep(0.01)
+            #time.sleep(0.01)
             self.proxyChanged.emit(proxy)
-
+        self.proxyChanged.emit('stop')
