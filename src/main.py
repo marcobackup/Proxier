@@ -3,7 +3,7 @@ from __init__ import *
 from table import *
 
 
-ui, _ = loadUiType('mainwindow.ui')
+ui, _ = loadUiType('gui/mainwindow.ui')
 
 class Proxier(QMainWindow, ui):
 
