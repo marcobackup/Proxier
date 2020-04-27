@@ -20,7 +20,6 @@ class Proxier(QMainWindow, ui):
         starting app...
     """
     def init_UI(self):
-        #model = ProxiesTable([['fwjiofw', 'wmi23o', '323', '2no3ig3oi4'], ['nn2ironio32r', 'r23nrj2390r', 'j23if2', '23fi32']], ['Address', 'Port', 'Country', 'Status'], self)
         self.tableWidget.horizontalHeader().hide()
         self.tableWidget.verticalHeader().hide()
         tool_bar = QToolBar('menuBar')

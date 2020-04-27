@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Proxier</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/images/assets/icon (1).png</normaloff>:/images/assets/icon (1).png</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true"/>
   </property>
@@ -44,7 +48,7 @@
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="autoFillBackground">
      <bool>false</bool>
@@ -73,8 +77,9 @@ QTabBar::tab {
 QTabBar::tab:selected {
 	background-color: rgb(66, 69, 74);
 	color: white;
- 	margin-bottom: -1px; 
+ 	margin-bottom: -1px;
 }
+
 
 </string>
     </property>
@@ -139,6 +144,66 @@ QTableWidget Header {
         <string>SOURCE</string>
        </property>
       </column>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>31</x>
+        <y>118</y>
+        <width>47</width>
+        <height>13</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ffffff;&quot;&gt;LINK:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QPlainTextEdit" name="plainTextEdit">
+      <property name="geometry">
+       <rect>
+        <x>28</x>
+        <y>139</y>
+        <width>241</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPlainTextEdit {
+    border: 1px solid white;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	background-image: url(:/images/assets/icon (1).png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	color: white;
+}</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>60</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
      </widget>
     </widget>
    </widget>
