@@ -20,15 +20,15 @@ class Proxier(QMainWindow, ui):
         starting app...
     """
     def init_UI(self):
-        self.tableWidget.horizontalHeader().hide()
-        self.tableWidget.verticalHeader().hide()
-        tool_bar = QToolBar('menuBar')
+        self.proxies_fetch_table.horizontalHeader().hide()
+        self.proxies_fetch_table.verticalHeader().hide()
+        #tool_bar = QToolBar('menuBar')
 
     """
         buttons handler
     """
     def buttons_handler(self):
-        self.startbtn.clicked.connect(self.fetch_proxies)
+        self.start_fetch_btn.clicked.connect(self.fetch_proxies)
 
     def fetch_proxies(self):
         self.proxies = []
@@ -37,24 +37,23 @@ class Proxier(QMainWindow, ui):
         self.fetch_proxies.start()
 
     def on_proxy_changed(self, value):
-        if value == 'stop':
-            self.check_proxies = CheckProxies(self.proxies)
-            self.check_proxies.statusChanged.connect(self.on_proxy_status_changed)
-            self.check_proxies.start()
-            self.proxies = []
+        status = value['status']
+        if not status:
+            #self.source_fetch_lbl.setText('Finished!')
+            errors = self.errors_fetch_lbl.text().split('">')[1].split('</')[0]
+            self.errors_fetch_lbl.setText(f'<span style=" font-weight:600; color:#ff3c0b;">{int(errors) + 1}</span>')
+            #self.start_fetch_btn.setText('START')
         else:
-            proxy = value.split(':')
-            row = self.tableWidget.rowCount()
-            self.tableWidget.insertRow(row)
-            self.tableWidget.setItem(row, 0, QTableWidgetItem(proxy[0]))
-            self.tableWidget.setItem(row, 1, QTableWidgetItem(proxy[1]))
-            self.tableWidget.setItem(row, 2, QTableWidgetItem('fewiofweio'))
-            self.tableWidget.setItem(row, 3, QTableWidgetItem('checking...'))
-            self.proxies.append({
-                'address': proxy[0],
-                'port': proxy[1],
-                'row': row
-            })
+            self.start_fetch_btn.setText('STOP')
+            proxy = value['proxy'].split(':')
+            row = self.proxies_fetch_table.rowCount()
+            self.proxies_fetch_table.insertRow(row)
+            self.proxies_fetch_table.setItem(row, 0, QTableWidgetItem(proxy[0]))
+            self.proxies_fetch_table.setItem(row, 1, QTableWidgetItem(proxy[1]))
+            self.proxies_fetch_table.setItem(row, 2, QTableWidgetItem(value['source']))
+            hits = self.hits_fetch_lbl.text().split('">')[1].split('</')[0]
+            self.hits_fetch_lbl.setText(f'<span style=" font-weight:600; color:#2cff21;">{int(hits) + 1}</span>')
+            self.source_fetch_lbl.setText('<span style=" font-weight:600; color:#ffffff;">{}</span>'.format(value['source']))
 
     def on_proxy_status_changed(self, value):
         result = None

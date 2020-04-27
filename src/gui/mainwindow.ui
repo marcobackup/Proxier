@@ -98,7 +98,7 @@ QTabBar::tab:selected {
       <string>Checker</string>
      </attribute>
     </widget>
-    <widget class="QWidget" name="tab_2">
+    <widget class="QWidget" name="leecher_tab">
      <attribute name="icon">
       <iconset resource="resource.qrc">
        <normaloff>:/images/assets/leecher.png</normaloff>:/images/assets/leecher.png</iconset>
@@ -106,13 +106,13 @@ QTabBar::tab:selected {
      <attribute name="title">
       <string>Leecher</string>
      </attribute>
-     <widget class="QTableWidget" name="tableWidget">
+     <widget class="QTableWidget" name="proxies_fetch_table">
       <property name="geometry">
        <rect>
         <x>290</x>
         <y>10</y>
         <width>302</width>
-        <height>281</height>
+        <height>261</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -149,7 +149,7 @@ QTableWidget Header {
       <property name="geometry">
        <rect>
         <x>31</x>
-        <y>118</y>
+        <y>91</y>
         <width>47</width>
         <height>13</height>
        </rect>
@@ -158,13 +158,16 @@ QTableWidget Header {
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ffffff;&quot;&gt;LINK:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
-     <widget class="QPlainTextEdit" name="plainTextEdit">
+     <widget class="QPlainTextEdit" name="link_fetch_text">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>28</x>
-        <y>139</y>
+        <y>110</y>
         <width>241</width>
-        <height>151</height>
+        <height>161</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -179,30 +182,181 @@ QTableWidget Header {
 }</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="start_fetch_btn">
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>20</y>
-        <width>75</width>
+        <y>22</y>
+        <width>241</width>
         <height>23</height>
        </rect>
       </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	color: white;
+	border: 1px solid white;
+	border-radius: 5px;
+	font-family: Impact;
+}
+
+QPushButton:hover {
+	background: white;
+	color: rgb(66, 69, 74);
+}</string>
+      </property>
       <property name="text">
-       <string>PushButton</string>
+       <string>START</string>
+      </property>
+      <property name="icon">
+       <iconset resource="resource.qrc">
+        <normaloff>:/images/assets/play.PNG</normaloff>:/images/assets/play.PNG</iconset>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="save_fetch_btn">
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>60</y>
-        <width>75</width>
+        <y>50</y>
+        <width>115</width>
         <height>23</height>
        </rect>
       </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	color: white;
+	border: 1px solid white;
+	border-radius: 5px;
+	font-family: Impact;
+}
+
+QPushButton:hover {
+	background: white;
+	color: rgb(66, 69, 74);
+}</string>
+      </property>
       <property name="text">
-       <string>PushButton</string>
+       <string>SAVE</string>
+      </property>
+      <property name="icon">
+       <iconset resource="resource.qrc">
+        <normaloff>:/images/assets/save.png</normaloff>:/images/assets/save.png</iconset>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>292</x>
+        <y>282</y>
+        <width>21</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Hits:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>281</y>
+        <width>41</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Source: &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="source_fetch_lbl">
+      <property name="geometry">
+       <rect>
+        <x>77</x>
+        <y>281</y>
+        <width>181</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#ffffff;&quot;&gt;nothing to see...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="hits_fetch_lbl">
+      <property name="geometry">
+       <rect>
+        <x>323</x>
+        <y>281</y>
+        <width>61</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#2cff21;&quot;&gt;0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>393</x>
+        <y>283</y>
+        <width>47</width>
+        <height>13</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Errors:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="errors_fetch_lbl">
+      <property name="geometry">
+       <rect>
+        <x>434</x>
+        <y>283</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#ff3c0b;&quot;&gt;0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="clear_fetch_btn">
+      <property name="geometry">
+       <rect>
+        <x>156</x>
+        <y>50</y>
+        <width>115</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	color: white;
+	border: 1px solid white;
+	border-radius: 5px;
+	font-family: Impact;
+}
+
+QPushButton:hover {
+	background: white;
+	color: rgb(66, 69, 74);
+}</string>
+      </property>
+      <property name="text">
+       <string>CLEAR</string>
+      </property>
+      <property name="icon">
+       <iconset resource="resource.qrc">
+        <normaloff>:/images/assets/trash.png</normaloff>:/images/assets/trash.png</iconset>
       </property>
      </widget>
     </widget>

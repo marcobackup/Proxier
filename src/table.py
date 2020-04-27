@@ -18,12 +18,30 @@ class CheckProxies(QThread):
 
 class FetchProxies(QThread):
     
-    proxyChanged = pyqtSignal(str)
+    proxyChanged = pyqtSignal(dict)
     fetcher = Fetcher()
 
     def run(self):
-        proxies = self.fetcher.fetch_proxies()
-        for proxy in proxies:
-            #time.sleep(0.01)
-            self.proxyChanged.emit(proxy)
-        self.proxyChanged.emit('stop')
+        sites = self.fetcher.get_proxies_sites()
+        for site in sites:
+            proxy = self.fetcher.fetch_proxy(site)
+            for _ in proxy:
+                #time.sleep(0.01)
+                if _:
+                    self.proxyChanged.emit(
+                        {
+                            'status': True,
+                            'work': True,
+                            'proxy': _,
+                            'source': site 
+                        }
+                    )
+                else:
+                    self.proxyChanged.emit(
+                        {
+                            'status': False
+                        }
+                    )
+        #self.proxyChanged.emit({
+        #    ''
+        #})
