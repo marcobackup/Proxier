@@ -9,4 +9,5 @@ This README would normally document whatever steps are necessary to get your app
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
 ### Test updater ###
-test updater v1.0!
+test updater v2.0!
+
