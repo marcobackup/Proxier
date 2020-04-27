@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>318</height>
+    <width>620</width>
+    <height>350</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>590</width>
-    <height>318</height>
+    <width>620</width>
+    <height>350</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>600</width>
-    <height>318</height>
+    <width>620</width>
+    <height>350</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -34,188 +34,121 @@
 	background: white
 }</string>
    </property>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>-26</x>
-      <y>4</y>
-      <width>241</width>
-      <height>151</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap resource="resource.qrc">:/images/assets/icon.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QTableWidget" name="tableWidget">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>192</x>
-      <y>0</y>
-      <width>431</width>
-      <height>321</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QTableView
-{
-    background-color: rgb(66, 69, 74);
-	color: white
-}</string>
-    </property>
-    <property name="showGrid">
-     <bool>false</bool>
-    </property>
-    <property name="gridStyle">
-     <enum>Qt::CustomDashLine</enum>
-    </property>
-    <column>
-     <property name="text">
-      <string>Address</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Port</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Country</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Status</string>
-     </property>
-    </column>
-   </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>61</x>
-      <y>158</y>
-      <width>71</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel {
-	font-family: Impact;
-	color: rgb(66, 69, 74)
-}</string>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;PROXIER&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="savebtn">
-    <property name="geometry">
-     <rect>
-      <x>17</x>
-      <y>238</y>
-      <width>41</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset resource="resource.qrc">
-      <normaloff>:/images/assets/save.png</normaloff>:/images/assets/save.png</iconset>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>50</width>
-      <height>50</height>
-     </size>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="startbtn">
-    <property name="geometry">
-     <rect>
-      <x>17</x>
-      <y>191</y>
-      <width>41</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset resource="resource.qrc">
-      <normaloff>:/images/assets/play.PNG</normaloff>:/images/assets/play.PNG</iconset>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>50</width>
-      <height>50</height>
-     </size>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="statuslabel">
-    <property name="geometry">
-     <rect>
-      <x>69</x>
-      <y>261</y>
-      <width>111</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;STATUS:&lt;/span&gt; fetching...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
-   <widget class="Line" name="line">
+   <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>180</y>
-      <width>191</width>
-      <height>16</height>
+      <y>0</y>
+      <width>620</width>
+      <height>328</height>
      </rect>
     </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">* {
+    background-color:  rgb(66, 69, 74);
+}
+
+QTabWidget {
+	border: none;
+    background-color:  rgb(66, 69, 74);
+}
+
+QTabWidget::pane {
+    background: red;
+}
+
+QTabBar::tab {
+	font-family: Impact;
+	padding: 3px;
+    background-color: white;
+	color: rgb(66, 69, 74);
+}
+
+QTabBar::tab:selected {
+	background-color: rgb(66, 69, 74);
+	color: white;
+ 	margin-bottom: -1px; 
+}
+
+</string>
+    </property>
+    <property name="currentIndex">
+     <number>1</number>
+    </property>
+    <property name="tabBarAutoHide">
+     <bool>false</bool>
+    </property>
+    <widget class="QWidget" name="tab">
+     <attribute name="icon">
+      <iconset resource="resource.qrc">
+       <normaloff>:/images/assets/checker.png</normaloff>:/images/assets/checker.png</iconset>
+     </attribute>
+     <attribute name="title">
+      <string>Checker</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="icon">
+      <iconset resource="resource.qrc">
+       <normaloff>:/images/assets/leecher.png</normaloff>:/images/assets/leecher.png</iconset>
+     </attribute>
+     <attribute name="title">
+      <string>Leecher</string>
+     </attribute>
+     <widget class="QTableWidget" name="tableWidget">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>10</y>
+        <width>302</width>
+        <height>281</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTableWidget {
+    border: 1px solid white;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	background-image: url(:/images/assets/icon (1).png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+QTableWidget Header {
+	background: red;
+}</string>
+      </property>
+      <column>
+       <property name="text">
+        <string>ADDRESS</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>PORT</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>SOURCE</string>
+       </property>
+      </column>
+     </widget>
+    </widget>
    </widget>
-   <zorder>line</zorder>
-   <zorder>label</zorder>
-   <zorder>tableWidget</zorder>
-   <zorder>label_4</zorder>
-   <zorder>savebtn</zorder>
-   <zorder>startbtn</zorder>
-   <zorder>statuslabel</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>600</width>
+     <width>620</width>
      <height>22</height>
     </rect>
    </property>

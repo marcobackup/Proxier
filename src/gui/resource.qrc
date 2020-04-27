@@ -1,9 +1,11 @@
 <RCC>
   <qresource prefix="images">
-    <file>assets/favicon.ico</file>
-    <file>assets/play.PNG</file>
-    <file>assets/stop.PNG</file>
-    <file>assets/save.png</file>
-    <file>assets/icon.png</file>
+    <file>../assets/icon (1).png</file>
+    <file>../assets/leecher.png</file>
+    <file>../assets/checker.png</file>
+    <file>../assets/favicon.ico</file>
+    <file>../assets/play.PNG</file>
+    <file>../assets/save.png</file>
+    <file>../assets/stop.PNG</file>
   </qresource>
 </RCC>
