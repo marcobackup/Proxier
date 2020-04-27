@@ -1,3 +1,4 @@
 .vscode
 src/__pycache__
 src/utils/__pycache__
+src/gui/__pycache__
