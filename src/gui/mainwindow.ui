@@ -84,7 +84,7 @@ QTabBar::tab:selected {
 </string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="tabBarAutoHide">
      <bool>false</bool>
@@ -123,11 +123,10 @@ QTabBar::tab:selected {
 	background-image: url(:/images/assets/icon (1).png);
 	background-repeat: no-repeat;
 	background-position: center center;
+	color: white;
 }
 
-QTableWidget Header {
-	background: red;
-}</string>
+</string>
       </property>
       <column>
        <property name="text">
@@ -271,7 +270,7 @@ QPushButton:hover {
        </rect>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Source: &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Status: &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QLabel" name="source_fetch_lbl">

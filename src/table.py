@@ -26,7 +26,6 @@ class FetchProxies(QThread):
         for site in sites:
             proxy = self.fetcher.fetch_proxy(site)
             for _ in proxy:
-                #time.sleep(0.01)
                 if _:
                     self.proxyChanged.emit(
                         {
@@ -42,6 +41,9 @@ class FetchProxies(QThread):
                             'status': False
                         }
                     )
-        #self.proxyChanged.emit({
-        #    ''
-        #})
+        self.proxyChanged.emit(
+            {
+                'status': True,
+                'work': False
+            }
+        )

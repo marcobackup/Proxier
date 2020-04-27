@@ -110,7 +110,6 @@ class Fetcher:
                     for proxy in fetched:
                         yield '.'.join(proxy[:len(proxy)-1]) + f':{proxy[len(proxy)-1]}'
         except Exception as e:
-            print(e)
             yield False
 
 
