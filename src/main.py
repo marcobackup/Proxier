@@ -31,7 +31,6 @@ class Proxier(QMainWindow, ui):
         self.start_fetch_btn.clicked.connect(self.fetch_proxies)
 
     def fetch_proxies(self):
-        self.proxies = []
         self.fetch_proxies = FetchProxies()
         self.fetch_proxies.proxyChanged.connect(self.on_proxy_changed)
         self.start_fetch_btn.setText('STOP')
@@ -45,15 +44,18 @@ class Proxier(QMainWindow, ui):
         else:
             if value['work']:
                 proxy = value['proxy'].split(':')
-                row = self.proxies_fetch_table.rowCount()
-                self.proxies_fetch_table.insertRow(row)
-                self.proxies_fetch_table.setItem(row, 0, QTableWidgetItem(proxy[0]))
-                self.proxies_fetch_table.setItem(row, 1, QTableWidgetItem(proxy[1]))
-                self.proxies_fetch_table.setItem(row, 2, QTableWidgetItem(value['source']))
-                hits = self.hits_fetch_lbl.text().split('">')[1].split('</')[0]
-                self.hits_fetch_lbl.setText(f'<span style=" font-weight:600; color:#2cff21;">{int(hits) + 1}</span>')
-                self.source_fetch_lbl.setText('<span style=" font-weight:600; color:#ffffff;">{}</span>'.format(value['source']))
+                if proxy[0] not in self.proxies:
+                    self.proxies.append(proxy)
+                    row = self.proxies_fetch_table.rowCount()
+                    self.proxies_fetch_table.insertRow(row)
+                    self.proxies_fetch_table.setItem(row, 0, QTableWidgetItem(proxy[0]))
+                    self.proxies_fetch_table.setItem(row, 1, QTableWidgetItem(proxy[1]))
+                    self.proxies_fetch_table.setItem(row, 2, QTableWidgetItem(value['source']))
+                    hits = self.hits_fetch_lbl.text().split('">')[1].split('</')[0]
+                    self.hits_fetch_lbl.setText(f'<span style=" font-weight:600; color:#2cff21;">{int(hits) + 1}</span>')
+                    self.source_fetch_lbl.setText('<span style=" font-weight:600; color:#ffffff;">{}</span>'.format(value['source']))
             else:
+                self.proxies = []
                 self.source_fetch_lbl.setText('<span style=" font-weight:600; color:#ffffff;">Finished!</span>')
                 self.start_fetch_btn.setText('START')
 
@@ -77,4 +79,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
