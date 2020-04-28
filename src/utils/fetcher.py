@@ -21,11 +21,11 @@ class Fetcher:
             'http://www.atomintersoft.com/anonymous_proxy_list',
             'http://www.live-socks.net/',
             'http://www.vipsocks24.net/',
-            'http://www.proxyserverlist24.top/',
-            'http://newfreshproxies-24.blogspot.com',
-            'http://www.freshnewproxies24.top/',
-            'http://www.socks24.org/',
-            'http://www.socksproxylist24.top/'
+            #'http://www.proxyserverlist24.top/',
+            #'http://newfreshproxies-24.blogspot.com',
+            #'http://www.freshnewproxies24.top/',
+            #'http://www.socks24.org/',
+            # 'http://www.socksproxylist24.top/'
         ]
         self.PATTERN = r'(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3}):(\d{1,5})'
         self.FILE_NAME = 'proxy.zip'

@@ -6,5 +6,4 @@ from PyQt5.uic import loadUiType
 
 from utils.fetcher import *
 from utils.checker import *
-from queue import Queue
-import time
+import webbrowser

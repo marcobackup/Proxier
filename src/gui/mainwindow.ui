@@ -97,22 +97,13 @@ QTabBar::tab:selected {
      <attribute name="title">
       <string>Checker</string>
      </attribute>
-    </widget>
-    <widget class="QWidget" name="leecher_tab">
-     <attribute name="icon">
-      <iconset resource="resource.qrc">
-       <normaloff>:/images/assets/leecher.png</normaloff>:/images/assets/leecher.png</iconset>
-     </attribute>
-     <attribute name="title">
-      <string>Leecher</string>
-     </attribute>
-     <widget class="QTableWidget" name="proxies_fetch_table">
+     <widget class="QTableWidget" name="proxies_fetch_table_2">
       <property name="geometry">
        <rect>
-        <x>290</x>
-        <y>10</y>
-        <width>302</width>
-        <height>261</height>
+        <x>190</x>
+        <y>23</y>
+        <width>402</width>
+        <height>231</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -127,6 +118,242 @@ QTabBar::tab:selected {
 }
 
 </string>
+      </property>
+      <property name="autoScrollMargin">
+       <number>5</number>
+      </property>
+      <column>
+       <property name="text">
+        <string>ADDRESS</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>PORT</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>CITY</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>STATUS</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QPushButton" name="addlist_checker_btn">
+      <property name="geometry">
+       <rect>
+        <x>28</x>
+        <y>23</y>
+        <width>141</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	color: white;
+	border: 1px solid white;
+	border-radius: 5px;
+	font-family: Impact;
+}
+
+QPushButton:hover {
+	background: white;
+	color: rgb(66, 69, 74);
+}
+
+QPushButton::menu-indicator{width:0px;}
+</string>
+      </property>
+      <property name="text">
+       <string>PROXY LIST</string>
+      </property>
+      <property name="icon">
+       <iconset resource="resource.qrc">
+        <normaloff>:/images/assets/plus.png</normaloff>:/images/assets/plus.png</iconset>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>270</y>
+        <width>281</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+	color: white;
+	border: 1px solid white;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	font-family: Impact;
+}</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="clear_checker_btn">
+      <property name="geometry">
+       <rect>
+        <x>28</x>
+        <y>57</y>
+        <width>141</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	color: white;
+	border: 1px solid white;
+	border-radius: 5px;
+	font-family: Impact;
+}
+
+QPushButton:hover {
+	background: white;
+	color: rgb(66, 69, 74);
+}
+
+</string>
+      </property>
+      <property name="text">
+       <string>CLEAR</string>
+      </property>
+      <property name="icon">
+       <iconset resource="resource.qrc">
+        <normaloff>:/images/assets/trash.png</normaloff>:/images/assets/trash.png</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="save_checker_btn">
+      <property name="geometry">
+       <rect>
+        <x>28</x>
+        <y>91</y>
+        <width>141</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	color: white;
+	border: 1px solid white;
+	border-radius: 5px;
+	font-family: Impact;
+}
+
+QPushButton:hover {
+	background: white;
+	color: rgb(66, 69, 74);
+}
+
+QPushButton::menu-indicator{width:0px;}
+</string>
+      </property>
+      <property name="text">
+       <string>EXPORT</string>
+      </property>
+      <property name="icon">
+       <iconset resource="resource.qrc">
+        <normaloff>:/images/assets/save.png</normaloff>:/images/assets/save.png</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="start_checker_btn">
+      <property name="geometry">
+       <rect>
+        <x>28</x>
+        <y>230</y>
+        <width>141</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	color: white;
+	border: 1px solid white;
+	border-radius: 5px;
+	font-family: Impact;
+}
+
+QPushButton:hover {
+	background: white;
+	color: rgb(66, 69, 74);
+}
+
+QPushButton::menu-indicator{width:0px;}
+</string>
+      </property>
+      <property name="text">
+       <string>START</string>
+      </property>
+      <property name="icon">
+       <iconset resource="resource.qrc">
+        <normaloff>:/images/assets/play.PNG</normaloff>:/images/assets/play.PNG</iconset>
+      </property>
+     </widget>
+     <widget class="QFrame" name="frame">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>299</y>
+        <width>120</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="leecher_tab">
+     <attribute name="icon">
+      <iconset resource="resource.qrc">
+       <normaloff>:/images/assets/leecher.png</normaloff>:/images/assets/leecher.png</iconset>
+     </attribute>
+     <attribute name="title">
+      <string>Leecher</string>
+     </attribute>
+     <widget class="QTableWidget" name="proxies_fetch_table">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>23</y>
+        <width>302</width>
+        <height>248</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTableWidget {
+    border: 1px solid white;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	background-image: url(:/images/assets/icon (1).png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	color: white;
+}
+
+</string>
+      </property>
+      <property name="autoScrollMargin">
+       <number>5</number>
       </property>
       <column>
        <property name="text">
@@ -240,7 +467,7 @@ QPushButton:hover {
 }</string>
       </property>
       <property name="text">
-       <string>SAVE</string>
+       <string>EXPORT</string>
       </property>
       <property name="icon">
        <iconset resource="resource.qrc">
@@ -360,32 +587,51 @@ QPushButton:hover {
      </widget>
     </widget>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>620</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="defaultUp">
-    <bool>false</bool>
-   </property>
-   <property name="nativeMenuBar">
-    <bool>true</bool>
-   </property>
-   <widget class="QMenu" name="menun">
-    <property name="title">
-     <string/>
+   <widget class="QFrame" name="frame_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>329</y>
+      <width>620</width>
+      <height>21</height>
+     </rect>
     </property>
-    <property name="icon">
-     <iconset resource="resource.qrc">
-      <normaloff>:/images/assets/favicon.ico</normaloff>:/images/assets/favicon.ico</iconset>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
     </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QPushButton" name="bitbucket_btn">
+     <property name="geometry">
+      <rect>
+       <x>4</x>
+       <y>-1</y>
+       <width>21</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="resource.qrc">
+       <normaloff>:/images/assets/favicon.ico</normaloff>:/images/assets/favicon.ico</iconset>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
    </widget>
-   <addaction name="menun"/>
   </widget>
  </widget>
  <resources>

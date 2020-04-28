@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="images">
+    <file>../assets/plus.png</file>
+    <file>../assets/list.png</file>
     <file>../assets/trash.png</file>
     <file>../assets/icon (1).png</file>
     <file>../assets/leecher.png</file>
