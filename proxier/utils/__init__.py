@@ -2,6 +2,7 @@
 import requests, re, threading, os, zipfile
 from bs4 import BeautifulSoup
 from multiprocessing.dummy import Pool
+from requests.exceptions import *
 
 
 HEADERS = {

@@ -21,6 +21,10 @@ class Proxier(QMainWindow, ui):
     def init_UI(self):
         self.proxies_fetch_table.horizontalHeader().hide()
         self.proxies_fetch_table.verticalHeader().hide()
+        self.proxies_checker_table.horizontalHeader().hide()
+        self.proxies_checker_table.verticalHeader().hide()
+        self.proxies_checker_table.setIconSize(QSize(20, 20))
+
 
     """
         buttons handler
@@ -138,8 +142,14 @@ class Proxier(QMainWindow, ui):
             self.proxies_checker_table.insertRow(row)
             self.proxies_checker_table.setItem(row, 0, QTableWidgetItem(value['address']))
             self.proxies_checker_table.setItem(row, 1, QTableWidgetItem(value['port']))
-            self.proxies_checker_table.setItem(row, 2, QTableWidgetItem('cniewonweoi'))
-            self.proxies_checker_table.setItem(row, 3, QTableWidgetItem('iocieowce'))
+            import resource_rc
+            item = QTableWidgetItem()
+            item.setSizeHint(QSize(20, 20))
+            city = value['city']
+            if city is not None: city = city.replace(' ', '-')
+            item.setIcon(QIcon(f'assets/ico/{city}-Flag.ico'))
+            self.proxies_checker_table.setItem(row, 2, item)
+            self.proxies_checker_table.setItem(row, 3, QTableWidgetItem(value['ms'] + 'ms'))
             hits = self.hits_checker_lbl.text().split('">')[1].split('</')[0]
             self.hits_checker_lbl.setText(f'<span style="font-size:10pt; font-weight:600; color:#2cff21;">{int(hits) + 1}</span>')            
         else:

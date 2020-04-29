@@ -21,8 +21,11 @@ class CheckProxies(QThread):
                 'port': port
             })
         for future in futures:
+            future = future['future'].get()
             self.statusChanged.emit({
-                'status': future['future'].get(), 
+                'status': future['status'],
+                'city': future['city'], 
+                'ms': future['ms'], 
                 'address': future['address'], 
                 'port': future['port']
             })
@@ -59,3 +62,4 @@ class FetchProxies(QThread):
                 'work': False
             }
         )
+
