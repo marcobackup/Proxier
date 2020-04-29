@@ -9,15 +9,23 @@ class CheckProxies(QThread):
     def __init__(self, proxies, parent=None):
         QThread.__init__(self, parent)
         self.proxies = proxies
-        self.pool = Pool(80)
+        self.pool = Pool(150)
 
     def run(self):
         futures = []
         for proxy in self.proxies:
             address, port = proxy.split(':')
-            futures.append(self.pool.apply_async(check_proxy, ['http://www.163.com', address, port]))
+            futures.append({
+                'future': self.pool.apply_async(check_proxy, ['http://www.163.com', address, port]),
+                'address': address,
+                'port': port
+            })
         for future in futures:
-            self.statusChanged.emit({'status': future.get(), 'address': address, 'port': port})
+            self.statusChanged.emit({
+                'status': future['future'].get(), 
+                'address': future['address'], 
+                'port': future['port']
+            })
 
 
 class FetchProxies(QThread):

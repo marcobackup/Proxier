@@ -20,7 +20,7 @@ class Fetcher:
             'http://www.atomintersoft.com/transparent_proxy_list',
             'http://www.atomintersoft.com/anonymous_proxy_list',
             #'http://www.live-socks.net/',
-            #'http://www.vipsocks24.net/',
+            'http://www.vipsocks24.net/',
             'http://www.proxyserverlist24.top/',
             'http://newfreshproxies-24.blogspot.com',
             #'http://www.freshnewproxies24.top/',

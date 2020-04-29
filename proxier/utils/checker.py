@@ -1,7 +1,7 @@
 
 from utils.__init__ import *
 from __init__ import *
-import time
+import time, pygeoip
 
 
 def check_proxy(site, address, port):
