@@ -179,12 +179,12 @@ QPushButton::menu-indicator{width:0px;}
         <normaloff>:/images/assets/plus.png</normaloff>:/images/assets/plus.png</iconset>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit">
+     <widget class="QLineEdit" name="site_checker_line">
       <property name="geometry">
        <rect>
-        <x>190</x>
+        <x>261</x>
         <y>270</y>
-        <width>281</width>
+        <width>331</width>
         <height>20</height>
        </rect>
       </property>
@@ -192,10 +192,13 @@ QPushButton::menu-indicator{width:0px;}
        <string notr="true">QLineEdit {
 	color: white;
 	border: 1px solid white;
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
 	font-family: Impact;
 }</string>
+      </property>
+      <property name="text">
+       <string>http://www.163.com</string>
       </property>
      </widget>
      <widget class="QPushButton" name="clear_checker_btn">
@@ -451,6 +454,19 @@ QPushButton::menu-indicator{width:0px;}
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ffffff;&quot;&gt;0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
+     <widget class="QLabel" name="label_10">
+      <property name="geometry">
+       <rect>
+        <x>192</x>
+        <y>271</y>
+        <width>61</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ffffff;&quot;&gt;URL:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="leecher_tab">
      <attribute name="icon">
@@ -511,12 +527,12 @@ QPushButton::menu-indicator{width:0px;}
        </rect>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ffffff;&quot;&gt;LINK:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ffffff;&quot;&gt;LINKS:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QPlainTextEdit" name="link_fetch_text">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -536,6 +552,28 @@ QPushButton::menu-indicator{width:0px;}
 	background-position: center center;
 	color: white;
 }</string>
+      </property>
+      <property name="plainText">
+       <string>https://proxy-daily.com/
+https://free-proxy-list.net/
+http://nntime.com/proxy-list-02.htm
+https://www.sslproxies.org/
+http://proxy.ipcn.org/proxylist2.html
+http://best-proxy.ru/feed
+http://www.proxylists.net/?HTTP
+http://ab57.ru/downloads/proxyold.txt
+http://www.freeproxy.ru/download/lists/goodproxy.txt
+http://www.proxylists.net/http_highanon.txt
+http://www.atomintersoft.com/high_anonymity_elite_proxy_list
+http://www.atomintersoft.com/transparent_proxy_list
+http://www.atomintersoft.com/anonymous_proxy_list
+http://www.live-socks.net/
+http://www.vipsocks24.net/
+http://www.proxyserverlist24.top/
+http://newfreshproxies-24.blogspot.com
+http://www.freshnewproxies24.top/
+http://www.socks24.org/
+http://www.socksproxylist24.top/</string>
       </property>
      </widget>
      <widget class="QPushButton" name="start_fetch_btn">

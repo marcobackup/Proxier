@@ -4,29 +4,8 @@ from utils.__init__ import *
 
 class Fetcher:
 
-    def __init__(self):
-        self.PROXY_SITES = [
-            'https://proxy-daily.com/',
-            'https://free-proxy-list.net/',
-            'http://nntime.com/proxy-list-02.htm',
-            'https://www.sslproxies.org/',
-            'http://proxy.ipcn.org/proxylist2.html',
-            'http://best-proxy.ru/feed',
-            'http://www.proxylists.net/?HTTP',
-            'http://ab57.ru/downloads/proxyold.txt',
-            'http://www.freeproxy.ru/download/lists/goodproxy.txt',
-            'http://www.proxylists.net/http_highanon.txt',
-            'http://www.atomintersoft.com/high_anonymity_elite_proxy_list',
-            'http://www.atomintersoft.com/transparent_proxy_list',
-            'http://www.atomintersoft.com/anonymous_proxy_list',
-            #'http://www.live-socks.net/',
-            'http://www.vipsocks24.net/',
-            'http://www.proxyserverlist24.top/',
-            'http://newfreshproxies-24.blogspot.com',
-            #'http://www.freshnewproxies24.top/',
-            'http://www.socks24.org/',
-            #'http://www.socksproxylist24.top/'
-        ]
+    def __init__(self, proxy_sites):
+        self.PROXY_SITES = proxy_sites
         self.PATTERN = r'(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3}):(\d{1,5})'
         self.FILE_NAME = 'proxy.zip'
 

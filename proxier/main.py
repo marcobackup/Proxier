@@ -94,8 +94,11 @@ class Proxier(QMainWindow, ui):
                 self.source_fetch_lbl.setText(f'<span style=" font-weight:600; color:#ffffff;">Exported {len(self.proxies_leecher)} hits!</span>')
         
     def fetch_proxies(self):
+        proxy_sites = []
+        for site in self.link_fetch_text.toPlainText().split('\n'):
+            if site != '': proxy_sites.append(site)
         btn_status = self.start_fetch_btn.text()
-        self.fetch_proxies = FetchProxies()
+        self.fetch_proxies = FetchProxies(proxy_sites)
         self.fetch_proxies.proxyChanged.connect(self.on_proxy_changed)
         if 'START' in btn_status:
             self.clear_fetch_table()
@@ -106,7 +109,7 @@ class Proxier(QMainWindow, ui):
 
     def start_checker(self):
         btn_status = self.start_checker_btn.text()
-        self.check_proxies = CheckProxies(self.proxies_checker, self)
+        self.check_proxies = CheckProxies(self.proxies_checker, self.site_checker_line.text(), self)
         self.check_proxies.statusChanged.connect(self.on_proxy_checked)
         if 'START' in btn_status:
             self.start_checker_btn.setText('STOP')
@@ -145,8 +148,7 @@ class Proxier(QMainWindow, ui):
             import resource_rc
             item = QTableWidgetItem()
             item.setSizeHint(QSize(20, 20))
-            city = value['city']
-            if city is not None: city = city.replace(' ', '-')
+            city = str(value['city']).replace(' ', '-')
             item.setIcon(QIcon(f'assets/ico/{city}-Flag.ico'))
             self.proxies_checker_table.setItem(row, 2, item)
             self.proxies_checker_table.setItem(row, 3, QTableWidgetItem(value['ms'] + 'ms'))
