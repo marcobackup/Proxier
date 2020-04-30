@@ -37,6 +37,15 @@ class Proxier(QMainWindow, ui):
         self.addlist_checker_btn.clicked.connect(self.show_import_menu)
         self.save_checker_btn.clicked.connect(self.show_save_menu)
         self.start_checker_btn.clicked.connect(self.start_checker)
+        # LEECHER THREAD
+        proxy_sites = []
+        for site in self.link_fetch_text.toPlainText().split('\n'):
+            if site != '': proxy_sites.append(site)
+        self.fetch_proxies = FetchProxies(proxy_sites, self)
+        self.fetch_proxies.proxyChanged.connect(self.on_proxy_changed)
+        # CHECKER THREAD
+        self.check_proxies = CheckProxies(self.proxies_checker, self.site_checker_line.text(), self)
+        self.check_proxies.statusChanged.connect(self.on_proxy_checked)
 
     def open_bitbucket_repo(self):
         webbrowser.open('https://bitbucket.org/Marklavoro/proxier')
@@ -55,7 +64,7 @@ class Proxier(QMainWindow, ui):
         import_menu = QMenu(self)
         import_menu.setStyleSheet('QMenu { background-color: rgb(66, 69, 74); color: white; } QMenu::item:selected { background: white; color: rgb(66, 69, 74); } QMenu[hide="true"]::right-arrow { }')
         import_menu.addAction('Import from leecher', self.import_proxies_fetched)
-        import_menu.addAction('Import from folder')
+        import_menu.addAction('Import from folder', self.import_proxies_file)
         self.addlist_checker_btn.setMenu(import_menu)
 
     def show_save_menu(self):
@@ -84,6 +93,18 @@ class Proxier(QMainWindow, ui):
                 hits = self.proxies_checker_lbl.text().split('">')[1].split('</')[0]
                 self.proxies_checker_lbl.setText(f'<span style=" font-size:10pt; font-weight:600; color:#ffffff;">{int(hits) + 1}</span>')
 
+    def import_proxies_file(self):
+        file_name = QFileDialog.getOpenFileName(self, 'Proxier - Import List')
+        if file_name[0] != '':
+            with open(file_name[0], 'r') as file_:
+                lines = file_.readlines()
+                for proxy in lines:
+                    proxy = proxy.replace('\n', '')
+                    if proxy not in self.proxies_checker:
+                        self.proxies_checker.append(proxy)
+                        hits = self.proxies_checker_lbl.text().split('">')[1].split('</')[0]
+                        self.proxies_checker_lbl.setText(f'<span style=" font-size:10pt; font-weight:600; color:#ffffff;">{int(hits) + 1}</span>')
+
     def save_hits(self):
         file_name = QFileDialog.getSaveFileName(self, 'Proxier - Save Hits')
         if file_name[0] != '':
@@ -92,29 +113,33 @@ class Proxier(QMainWindow, ui):
                     file_.write(f'{address}:{port}\n')
                 file_.close()
                 self.source_fetch_lbl.setText(f'<span style=" font-weight:600; color:#ffffff;">Exported {len(self.proxies_leecher)} hits!</span>')
-        
+
     def fetch_proxies(self):
-        proxy_sites = []
-        for site in self.link_fetch_text.toPlainText().split('\n'):
-            if site != '': proxy_sites.append(site)
         btn_status = self.start_fetch_btn.text()
-        self.fetch_proxies = FetchProxies(proxy_sites)
-        self.fetch_proxies.proxyChanged.connect(self.on_proxy_changed)
         if 'START' in btn_status:
-            self.clear_fetch_table()
-            self.start_fetch_btn.setText('STOP')
             self.fetch_proxies.start()
+            self.fetch_proxies.resume()
+            self.clear_fetch_btn.setDisabled(True)
+            self.save_fetch_btn.setDisabled(True)
+            self.start_fetch_btn.setText('STOP')
         else:
+            self.clear_fetch_btn.setDisabled(False)
+            self.save_fetch_btn.setDisabled(False)
+            self.fetch_proxies.suspend()
             self.start_fetch_btn.setText('START')
 
     def start_checker(self):
         btn_status = self.start_checker_btn.text()
-        self.check_proxies = CheckProxies(self.proxies_checker, self.site_checker_line.text(), self)
-        self.check_proxies.statusChanged.connect(self.on_proxy_checked)
         if 'START' in btn_status:
+            self.check_proxies.resume()
             self.start_checker_btn.setText('STOP')
+            self.clear_checker_btn.setDisabled(True)
+            self.addlist_checker_btn.setDisabled(True)
             self.check_proxies.start()
         else:
+            self.clear_checker_btn.setDisabled(False)
+            self.addlist_checker_btn.setDisabled(False)
+            self.check_proxies.suspend()
             self.start_checker_btn.setText('START')
 
     def on_proxy_changed(self, value):
@@ -141,19 +166,23 @@ class Proxier(QMainWindow, ui):
 
     def on_proxy_checked(self, value):
         if value['status']:
-            row = self.proxies_checker_table.rowCount()
-            self.proxies_checker_table.insertRow(row)
-            self.proxies_checker_table.setItem(row, 0, QTableWidgetItem(value['address']))
-            self.proxies_checker_table.setItem(row, 1, QTableWidgetItem(value['port']))
-            import resource_rc
-            item = QTableWidgetItem()
-            item.setSizeHint(QSize(20, 20))
-            city = str(value['city']).replace(' ', '-')
-            item.setIcon(QIcon(f'assets/ico/{city}-Flag.ico'))
-            self.proxies_checker_table.setItem(row, 2, item)
-            self.proxies_checker_table.setItem(row, 3, QTableWidgetItem(value['ms'] + 'ms'))
-            hits = self.hits_checker_lbl.text().split('">')[1].split('</')[0]
-            self.hits_checker_lbl.setText(f'<span style="font-size:10pt; font-weight:600; color:#2cff21;">{int(hits) + 1}</span>')            
+            if value['status'] == 'error':
+                errors = self.errors_checker_lbl.text().split('">')[1].split('</')[0]
+                self.errors_checker_lbl.setText(f'<span style="font-size:10pt; font-weight:600; color:#ff3c0b;">{int(errors) + 1}</span>')                    
+            else:
+                row = self.proxies_checker_table.rowCount()
+                self.proxies_checker_table.insertRow(row)
+                self.proxies_checker_table.setItem(row, 0, QTableWidgetItem(value['address']))
+                self.proxies_checker_table.setItem(row, 1, QTableWidgetItem(value['port']))
+                import resource_rc
+                item = QTableWidgetItem()
+                item.setSizeHint(QSize(20, 20))
+                city = str(value['city']).replace(' ', '-')
+                item.setIcon(QIcon(f'assets/ico/{city}-Flag.ico'))
+                self.proxies_checker_table.setItem(row, 2, item)
+                self.proxies_checker_table.setItem(row, 3, QTableWidgetItem(value['ms'] + 'ms'))
+                hits = self.hits_checker_lbl.text().split('">')[1].split('</')[0]
+                self.hits_checker_lbl.setText(f'<span style="font-size:10pt; font-weight:600; color:#2cff21;">{int(hits) + 1}</span>')            
         else:
             bad = self.bad_checker_lbl.text().split('">')[1].split('</')[0]
             self.bad_checker_lbl.setText(f'<span style="font-size:10pt; font-weight:600; color:#ff3c0b;">{int(bad) + 1}</span>')

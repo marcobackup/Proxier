@@ -10,8 +10,8 @@ def check_proxy(site, address, port):
     response = {}
     try:
         proxies = {
-            'http': f'http://{address}:{port}',
-            'https': f'https://{address}:{port}'
+            'http': f'socks5://{address}:{port}',
+            'https': f'socks5://{address}:{port}'
         }
         t1 = time.time()
         requests.get(

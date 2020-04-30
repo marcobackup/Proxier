@@ -205,7 +205,7 @@ QPushButton::menu-indicator{width:0px;}
       <property name="geometry">
        <rect>
         <x>28</x>
-        <y>57</y>
+        <y>54</y>
         <width>141</width>
         <height>23</height>
        </rect>
@@ -240,7 +240,7 @@ QPushButton:hover {
       <property name="geometry">
        <rect>
         <x>28</x>
-        <y>91</y>
+        <y>85</y>
         <width>141</width>
         <height>23</height>
        </rect>
