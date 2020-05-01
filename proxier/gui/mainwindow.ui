@@ -27,7 +27,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="resource.qrc">
-    <normaloff>:/images/assets/icon (1).png</normaloff>:/images/assets/icon (1).png</iconset>
+    <normaloff>:/images/assets/favicon.ico</normaloff>:/images/assets/favicon.ico</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -84,7 +84,7 @@ QTabBar::tab:selected {
 </string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <property name="tabBarAutoHide">
      <bool>false</bool>
@@ -98,6 +98,9 @@ QTabBar::tab:selected {
       <string>Checker</string>
      </attribute>
      <widget class="QTableWidget" name="proxies_checker_table">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>190</x>
@@ -467,6 +470,32 @@ QPushButton::menu-indicator{width:0px;}
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ffffff;&quot;&gt;URL:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>29</x>
+        <y>273</y>
+        <width>41</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Status: &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="source_checker_lbl">
+      <property name="geometry">
+       <rect>
+        <x>75</x>
+        <y>273</y>
+        <width>111</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#ffffff;&quot;&gt;nothing to see...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="leecher_tab">
      <attribute name="icon">
@@ -477,6 +506,9 @@ QPushButton::menu-indicator{width:0px;}
       <string>Leecher</string>
      </attribute>
      <widget class="QTableWidget" name="proxies_fetch_table">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>290</x>
@@ -532,7 +564,7 @@ QPushButton::menu-indicator{width:0px;}
      </widget>
      <widget class="QPlainTextEdit" name="link_fetch_text">
       <property name="enabled">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -770,7 +802,7 @@ QPushButton:hover {
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QPushButton" name="bitbucket_btn">
+    <widget class="QPushButton" name="github_btn">
      <property name="geometry">
       <rect>
        <x>4</x>
@@ -790,7 +822,13 @@ QPushButton:hover {
      </property>
      <property name="icon">
       <iconset resource="resource.qrc">
-       <normaloff>:/images/assets/favicon.ico</normaloff>:/images/assets/favicon.ico</iconset>
+       <normaloff>:/images/assets/github.jpg</normaloff>:/images/assets/github.jpg</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>28</width>
+       <height>28</height>
+      </size>
      </property>
      <property name="default">
       <bool>false</bool>

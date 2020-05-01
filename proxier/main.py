@@ -10,8 +10,9 @@ class Proxier(QMainWindow, ui):
         QMainWindow.__init__(self)
         self.setupUi(self)
         self.init_UI()
+        self.toast = ToastNotifier()
         self.proxies_leecher = []
-        self.proxies_checker = []
+        self.proxies_checker = {'list': [], 'countries': {}}
         # starting handling...
         self.buttons_handler()
 
@@ -30,7 +31,7 @@ class Proxier(QMainWindow, ui):
         buttons handler
     """
     def buttons_handler(self):
-        self.bitbucket_btn.clicked.connect(self.open_bitbucket_repo)
+        self.github_btn.clicked.connect(self.open_github_repo)
         self.start_fetch_btn.clicked.connect(self.fetch_proxies)
         self.save_fetch_btn.clicked.connect(self.save_hits)
         self.clear_fetch_btn.clicked.connect(self.clear_fetch_table)
@@ -44,11 +45,11 @@ class Proxier(QMainWindow, ui):
         self.fetch_proxies = FetchProxies(proxy_sites, self)
         self.fetch_proxies.proxyChanged.connect(self.on_proxy_changed)
         # CHECKER THREAD
-        self.check_proxies = CheckProxies(self.proxies_checker, self.site_checker_line.text(), self)
+        self.check_proxies = CheckProxies(self.proxies_checker['list'], self.site_checker_line.text(), self)
         self.check_proxies.statusChanged.connect(self.on_proxy_checked)
 
-    def open_bitbucket_repo(self):
-        webbrowser.open('https://bitbucket.org/Marklavoro/proxier')
+    def open_github_repo(self):
+        webbrowser.open('https://github.com/Marklab9/proxier')
 
     def clear_fetch_table(self):
         self.proxies_fetch_table.clear()
@@ -70,13 +71,36 @@ class Proxier(QMainWindow, ui):
     def show_save_menu(self):
         save_menu = QMenu(self)
         save_menu.setStyleSheet('QMenu { background-color: rgb(66, 69, 74); color: white; } QMenu::item:selected { background: white; color: rgb(66, 69, 74); } QMenu[hide="true"]::right-arrow { }')
-        save_menu.addAction('Save all')
+        save_menu.addAction('Save all', self.save_all)
         sub_menu = save_menu.addMenu('Save by type')
         sub_menu.addAction('http/s')
         sub_menu.addAction('socks4')
         sub_menu.addAction('socks5')
-        save_menu.addAction('Save by country')
+        save_menu.addAction('Save by country', self.save_by_country)
         self.save_checker_btn.setMenu(save_menu)
+
+    def save_by_country(self):
+        countries = []
+        for country in self.proxies_checker['countries']:
+            countries.append(country)
+        country, is_pressed = QInputDialog.getItem(self, 'Proxier - Get Country', 'Country: ', countries, 0, False)
+        is_pressed.setStyleSheet('QInputDialog {background-color: rgb(66, 69, 74);}')
+        if is_pressed and country:
+            file_name = QFileDialog.getSaveFileName(self, f'Proxier - Save Hits {country}')
+            if file_name[0] != '':
+                with open(file_name[0], 'w') as file_:
+                    for hit in self.proxies_checker['countries'][country]:
+                        file_.write(f'{hit}\n')
+                    file_.close()
+
+    def save_all(self):
+        file_name = QFileDialog.getSaveFileName(self, f'Proxier - Save Hits')
+        if file_name[0] != '':
+            with open(file_name[0], 'w') as file_:
+                for country in self.proxies_checker['countries']:
+                    for hit in self.proxies_checker['countries'][country]:
+                        file_.write(f'{hit}\n')
+                file_.close()
 
     def get_hits(self):
         rows_count = self.proxies_fetch_table.rowCount()
@@ -88,8 +112,8 @@ class Proxier(QMainWindow, ui):
     def import_proxies_fetched(self):
         for address, port in self.get_hits():
             proxy = f'{address}:{port}'
-            if proxy not in self.proxies_checker:
-                self.proxies_checker.append(proxy)
+            if proxy not in self.proxies_checker['list']:
+                self.proxies_checker['list'].append(proxy)
                 hits = self.proxies_checker_lbl.text().split('">')[1].split('</')[0]
                 self.proxies_checker_lbl.setText(f'<span style=" font-size:10pt; font-weight:600; color:#ffffff;">{int(hits) + 1}</span>')
 
@@ -100,8 +124,8 @@ class Proxier(QMainWindow, ui):
                 lines = file_.readlines()
                 for proxy in lines:
                     proxy = proxy.replace('\n', '')
-                    if proxy not in self.proxies_checker:
-                        self.proxies_checker.append(proxy)
+                    if proxy not in self.proxies_checker['list']:
+                        self.proxies_checker['list'].append(proxy)
                         hits = self.proxies_checker_lbl.text().split('">')[1].split('</')[0]
                         self.proxies_checker_lbl.setText(f'<span style=" font-size:10pt; font-weight:600; color:#ffffff;">{int(hits) + 1}</span>')
 
@@ -118,29 +142,37 @@ class Proxier(QMainWindow, ui):
         btn_status = self.start_fetch_btn.text()
         if 'START' in btn_status:
             self.fetch_proxies.start()
+            self.clear_fetch_btn.setDisabled(True)
+            self.start_fetch_btn.setText('STOP')
+        elif 'RESUME' in btn_status:
             self.fetch_proxies.resume()
             self.clear_fetch_btn.setDisabled(True)
-            self.save_fetch_btn.setDisabled(True)
             self.start_fetch_btn.setText('STOP')
         else:
             self.clear_fetch_btn.setDisabled(False)
-            self.save_fetch_btn.setDisabled(False)
+            self.source_fetch_lbl.setText('<span style=" font-weight:600; color:#ffffff;">Stopped.</span>')
             self.fetch_proxies.suspend()
-            self.start_fetch_btn.setText('START')
+            self.start_fetch_btn.setText('RESUME')
 
     def start_checker(self):
         btn_status = self.start_checker_btn.text()
         if 'START' in btn_status:
-            self.check_proxies.resume()
             self.start_checker_btn.setText('STOP')
             self.clear_checker_btn.setDisabled(True)
             self.addlist_checker_btn.setDisabled(True)
+            self.source_checker_lbl.setText('<span style=" font-weight:600; color:#ffffff;">Checking...</span>')
             self.check_proxies.start()
+        elif 'RESUME' in btn_status:
+            self.check_proxies.resume()
+            self.clear_checker_btn.setDisabled(True)
+            self.addlist_checker_btn.setDisabled(True)
+            self.source_checker_lbl.setText('<span style=" font-weight:600; color:#ffffff;">Checking...</span>')
         else:
             self.clear_checker_btn.setDisabled(False)
             self.addlist_checker_btn.setDisabled(False)
+            self.source_checker_lbl.setText('<span style=" font-weight:600; color:#ffffff;">Stopped</span>')
             self.check_proxies.suspend()
-            self.start_checker_btn.setText('START')
+            self.start_checker_btn.setText('RESUME')
 
     def on_proxy_changed(self, value):
         status = value['status']
@@ -149,6 +181,7 @@ class Proxier(QMainWindow, ui):
             self.errors_fetch_lbl.setText(f'<span style=" font-weight:600; color:#ff3c0b;">{int(errors) + 1}</span>')
         else:
             if value['work']:
+                self.source_fetch_lbl.setText('<span style=" font-weight:600; color:#ffffff;">{}</span>'.format(value['source']))
                 proxy = value['proxy'].split(':')
                 if value['proxy'] not in self.proxies_leecher:
                     self.proxies_leecher.append(value['proxy'])
@@ -159,25 +192,33 @@ class Proxier(QMainWindow, ui):
                     self.proxies_fetch_table.setItem(row, 2, QTableWidgetItem(value['source']))
                     hits = self.hits_fetch_lbl.text().split('">')[1].split('</')[0]
                     self.hits_fetch_lbl.setText(f'<span style=" font-weight:600; color:#2cff21;">{int(hits) + 1}</span>')
-                    self.source_fetch_lbl.setText('<span style=" font-weight:600; color:#ffffff;">{}</span>'.format(value['source']))
             else:
                 self.source_fetch_lbl.setText(f'<span style=" font-weight:600; color:#ffffff;">Leeched {len(self.proxies_leecher)} proxies!</span>')
+                self.clear_fetch_btn.setDisabled(False)
                 self.start_fetch_btn.setText('START')
+                self.toast.show_toast('Proxier', f'Leeched {len(self.proxies_leecher)} proxies!', duration=10, icon_path='assets/favicon.ico')
 
     def on_proxy_checked(self, value):
         if value['status']:
             if value['status'] == 'error':
                 errors = self.errors_checker_lbl.text().split('">')[1].split('</')[0]
                 self.errors_checker_lbl.setText(f'<span style="font-size:10pt; font-weight:600; color:#ff3c0b;">{int(errors) + 1}</span>')                    
+            elif value['status'] == 'end':
+                self.toast.show_toast('Proxier', f'Proxies checked!', duration=10, icon_path='assets/favicon.ico')
+                self.source_checker_lbl.setText('<span style=" font-weight:600; color:#ffffff;">Finished</span>')
+                self.clear_checker_btn.setDisabled(True)
+                self.addlist_checker_btn.setDisabled(True)
             else:
                 row = self.proxies_checker_table.rowCount()
                 self.proxies_checker_table.insertRow(row)
                 self.proxies_checker_table.setItem(row, 0, QTableWidgetItem(value['address']))
                 self.proxies_checker_table.setItem(row, 1, QTableWidgetItem(value['port']))
-                import resource_rc
                 item = QTableWidgetItem()
-                item.setSizeHint(QSize(20, 20))
+                item.setSizeHint(QSize(0, 0))
                 city = str(value['city']).replace(' ', '-')
+                if city not in self.proxies_checker['countries']: 
+                    self.proxies_checker['countries'][city] = []
+                self.proxies_checker['countries'][city].append(value['address'] + ':' + value['port'])
                 item.setIcon(QIcon(f'assets/ico/{city}-Flag.ico'))
                 self.proxies_checker_table.setItem(row, 2, item)
                 self.proxies_checker_table.setItem(row, 3, QTableWidgetItem(value['ms'] + 'ms'))

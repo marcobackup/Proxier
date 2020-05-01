@@ -54,6 +54,9 @@ class CheckProxies(QThread):
                 'address': future['address'],
                 'port': future['port']
             })
+        self.statusChanged.emit({
+            'status': 'end',
+        })
 
 
 fetch_wait = QWaitCondition()
