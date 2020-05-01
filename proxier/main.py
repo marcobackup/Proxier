@@ -196,7 +196,8 @@ class Proxier(QMainWindow, ui):
                 self.source_fetch_lbl.setText(f'<span style=" font-weight:600; color:#ffffff;">Leeched {len(self.proxies_leecher)} proxies!</span>')
                 self.clear_fetch_btn.setDisabled(False)
                 self.start_fetch_btn.setText('START')
-                self.toast.show_toast('Proxier', f'Leeched {len(self.proxies_leecher)} proxies!', duration=10, icon_path='assets/favicon.ico')
+                self.toast.show_toast('Proxier', f'Leeched {len(self.proxies_leecher)} proxies!', duration=2, icon_path='assets/favicon.ico', threaded=True)
+
 
     def on_proxy_checked(self, value):
         if value['status']:
@@ -204,10 +205,11 @@ class Proxier(QMainWindow, ui):
                 errors = self.errors_checker_lbl.text().split('">')[1].split('</')[0]
                 self.errors_checker_lbl.setText(f'<span style="font-size:10pt; font-weight:600; color:#ff3c0b;">{int(errors) + 1}</span>')                    
             elif value['status'] == 'end':
-                self.toast.show_toast('Proxier', f'Proxies checked!', duration=10, icon_path='assets/favicon.ico')
+                self.start_checker_btn.setText('START')
+                self.toast.show_toast('Proxier', f'Proxies checked!', duration=10, icon_path='assets/favicon.ico', threaded=True)
                 self.source_checker_lbl.setText('<span style=" font-weight:600; color:#ffffff;">Finished</span>')
-                self.clear_checker_btn.setDisabled(True)
-                self.addlist_checker_btn.setDisabled(True)
+                self.clear_checker_btn.setDisabled(False)
+                self.addlist_checker_btn.setDisabled(False)
             else:
                 row = self.proxies_checker_table.rowCount()
                 self.proxies_checker_table.insertRow(row)
@@ -227,10 +229,11 @@ class Proxier(QMainWindow, ui):
         else:
             bad = self.bad_checker_lbl.text().split('">')[1].split('</')[0]
             self.bad_checker_lbl.setText(f'<span style="font-size:10pt; font-weight:600; color:#ff3c0b;">{int(bad) + 1}</span>')
-        checked = self.checked_checker_lbl.text().split('">')[1].split('</')[0]
-        self.checked_checker_lbl.setText(f'<span style="font-size:10pt; font-weight:600; color:#ffffff;">{int(checked) + 1}</span>')
-        proxies = self.proxies_checker_lbl.text().split('">')[1].split('</')[0]
-        self.proxies_checker_lbl.setText(f'<span style="font-size:10pt; font-weight:600; color:#ffffff;">{int(proxies) - 1}</span>')
+        if value['status'] != 'end':
+            checked = self.checked_checker_lbl.text().split('">')[1].split('</')[0]
+            self.checked_checker_lbl.setText(f'<span style="font-size:10pt; font-weight:600; color:#ffffff;">{int(checked) + 1}</span>')
+            proxies = self.proxies_checker_lbl.text().split('">')[1].split('</')[0]
+            self.proxies_checker_lbl.setText(f'<span style="font-size:10pt; font-weight:600; color:#ffffff;">{int(proxies) - 1}</span>')
 
 
 

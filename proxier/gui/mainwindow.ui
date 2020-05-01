@@ -84,7 +84,7 @@ QTabBar::tab:selected {
 </string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="tabBarAutoHide">
      <bool>false</bool>
@@ -183,6 +183,9 @@ QPushButton::menu-indicator{width:0px;}
       </property>
      </widget>
      <widget class="QLineEdit" name="site_checker_line">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>261</x>
@@ -201,7 +204,7 @@ QPushButton::menu-indicator{width:0px;}
 }</string>
       </property>
       <property name="text">
-       <string>http://www.163.com</string>
+       <string>http://www.163.com  (disabled)</string>
       </property>
      </widget>
      <widget class="QPushButton" name="clear_checker_btn">
@@ -554,12 +557,12 @@ QPushButton::menu-indicator{width:0px;}
        <rect>
         <x>31</x>
         <y>91</y>
-        <width>47</width>
-        <height>13</height>
+        <width>151</width>
+        <height>16</height>
        </rect>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ffffff;&quot;&gt;LINKS:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ffffff;&quot;&gt;LINKS:   (disabled)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QPlainTextEdit" name="link_fetch_text">
