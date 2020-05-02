@@ -84,7 +84,6 @@ class Proxier(QMainWindow, ui):
         for country in self.proxies_checker['countries']:
             countries.append(country)
         country, is_pressed = QInputDialog.getItem(self, 'Proxier - Get Country', 'Country: ', countries, 0, False)
-        is_pressed.setStyleSheet('QInputDialog {background-color: rgb(66, 69, 74);}')
         if is_pressed and country:
             file_name = QFileDialog.getSaveFileName(self, f'Proxier - Save Hits {country}')
             if file_name[0] != '':
@@ -196,8 +195,10 @@ class Proxier(QMainWindow, ui):
                 self.source_fetch_lbl.setText(f'<span style=" font-weight:600; color:#ffffff;">Leeched {len(self.proxies_leecher)} proxies!</span>')
                 self.clear_fetch_btn.setDisabled(False)
                 self.start_fetch_btn.setText('START')
-                self.toast.show_toast('Proxier', f'Leeched {len(self.proxies_leecher)} proxies!', duration=2, icon_path='assets/favicon.ico', threaded=True)
-
+                try:
+                    self.toast.show_toast('Proxier', f'Leeched {len(self.proxies_leecher)} proxies!', duration=2, icon_path='assets/favicon.ico', threaded=True)
+                except:
+                    pass
 
     def on_proxy_checked(self, value):
         if value['status']:
@@ -206,7 +207,10 @@ class Proxier(QMainWindow, ui):
                 self.errors_checker_lbl.setText(f'<span style="font-size:10pt; font-weight:600; color:#ff3c0b;">{int(errors) + 1}</span>')                    
             elif value['status'] == 'end':
                 self.start_checker_btn.setText('START')
-                self.toast.show_toast('Proxier', f'Proxies checked!', duration=10, icon_path='assets/favicon.ico', threaded=True)
+                try:
+                    self.toast.show_toast('Proxier', f'Proxies checked!', duration=10, icon_path='assets/favicon.ico', threaded=True)
+                except:
+                    pass
                 self.source_checker_lbl.setText('<span style=" font-weight:600; color:#ffffff;">Finished</span>')
                 self.clear_checker_btn.setDisabled(False)
                 self.addlist_checker_btn.setDisabled(False)
