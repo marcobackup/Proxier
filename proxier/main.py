@@ -12,7 +12,7 @@ class Proxier(QMainWindow, ui):
         self.init_UI()
         self.toast = ToastNotifier()
         self.proxies_leecher = []
-        self.proxies_checker = {'list': [], 'countries': {}}
+        self.proxies_checker = {'list': [], 'countries': {}, 'types': {}}
         # starting handling...
         self.buttons_handler()
 
