@@ -4,10 +4,10 @@
 Fast and easy-to-use proxy tool powered by python.
 
 
-## Checker ##
-Checking a lot of proxies quickly
+## Checker
+### Checking a lot of proxies quickly with 250 standard workers
 ![checker](https://github.com/Marklab9/Proxier/blob/master/docs/checker.PNG?raw=true)
 
-## Leecher ##
-Thanks to proxier's algorithm you can steal millions of proxies
+## Leecher
+### Thanks to proxier's algorithm you can steal millions of proxies
 ![leecher](https://github.com/Marklab9/Proxier/blob/master/docs/leecher.PNG?raw=true)
