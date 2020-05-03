@@ -2,3 +2,12 @@
 ![qt](https://img.shields.io/badge/PyQt-v5-red)
 # Proxier
 Fast and easy-to-use proxy tool powered by python.
+
+
+## Checker ##
+Checking a lot of proxies quickly
+![checker](https://github.com/Marklab9/Proxier/blob/master/docs/checker.PNG?raw=true)
+
+## Leecher ##
+Thanks to proxier's algorithm you can steal millions of proxies
+![leecher](https://github.com/Marklab9/Proxier/blob/master/docs/leecher.PNG?raw=true)
