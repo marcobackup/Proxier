@@ -1,5 +1,4 @@
-
-import requests, re, threading, os, zipfile
+import requests, re, threading, os, zipfile, socket, struct
 from bs4 import BeautifulSoup
 from multiprocessing.dummy import Pool
 from requests.exceptions import *

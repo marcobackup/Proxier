@@ -12,7 +12,8 @@ class CheckProxies(QThread):
         super(CheckProxies, self).__init__()
         self.proxies = proxies
         self.site = site
-        self.pool = Pool(200)
+        # www.baidu.com
+        self.pool = Pool(250)
         self.mutex = QMutex()
         self.pause = None
 
@@ -52,7 +53,8 @@ class CheckProxies(QThread):
                 'city': future['city'],
                 'ms': future['ms'],
                 'address': future['address'],
-                'port': future['port']
+                'port': future['port'],
+                'type': future['type']
             })
         self.statusChanged.emit({
             'status': 'end',

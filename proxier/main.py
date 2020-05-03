@@ -52,14 +52,31 @@ class Proxier(QMainWindow, ui):
         webbrowser.open('https://github.com/Marklab9/proxier')
 
     def clear_fetch_table(self):
-        self.proxies_fetch_table.clear()
-        self.proxies_fetch_table.setRowCount(0)
-        self.proxies_leecher = []
-        self.source_fetch_lbl.setText(
-            '<span style=" font-weight:600; color:#ffffff;">Cleared!</span>'
-        )      
-        self.hits_fetch_lbl.setText(f'<span style=" font-weight:600; color:#2cff21;">0</span>')
-        self.errors_fetch_lbl.setText(f'<span style=" font-weight:600; color:#ff3c0b;">0</span>')
+        clear_ok = QMessageBox.question(self, 'Clear all', 'Are you sure?', QMessageBox.Yes | QMessageBox.No)
+        if clear_ok == QMessageBox.Yes:
+            self.proxies_fetch_table.clear()
+            self.proxies_fetch_table.setRowCount(0)
+            self.proxies_leecher = []
+            self.source_fetch_lbl.setText(
+                '<span style=" font-weight:600; color:#ffffff;">Cleared!</span>'
+            )      
+            self.hits_fetch_lbl.setText('<span style=" font-weight:600; color:#2cff21;">0</span>')
+            self.errors_fetch_lbl.setText('<span style=" font-weight:600; color:#ff3c0b;">0</span>')
+
+    def clear_checker_table(self):
+        clear_ok = QMessageBox.question(self, 'Clear all', 'Are you sure?', QMessageBox.Yes | QMessageBox.No)
+        if clear_ok == QMessageBox.Yes:
+            self.proxies_checker_table.clear()
+            self.proxies_checker_table.setRowCount(0)
+            self.proxies_checker = []
+            self.source_checker_lbl.setText(
+                '<span style=" font-weight:600; color:#ffffff;">Cleared!</span>'
+            )      
+            self.hits_checker_lbl.setText('<span style=" font-weight:600; color:#2cff21;">0</span>')
+            self.errors_checker_lbl.setText('<span style=" font-weight:600; color:#ff3c0b;">0</span>')
+            self.checked_checker_lbl.setText('<span style=" font-size:10pt; font-weight:600; color:#ffffff;">0</span>')
+            self.bad_checker_lbl.setText('<span style=" font-weight:600; color:#ff3c0b;">0</span>')
+            self.proxies_checker_lbl.setText('<span style=" font-weight:600; color:#ffffff;">0</span>')
 
     def show_import_menu(self):
         import_menu = QMenu(self)
@@ -73,11 +90,41 @@ class Proxier(QMainWindow, ui):
         save_menu.setStyleSheet('QMenu { background-color: rgb(66, 69, 74); color: white; } QMenu::item:selected { background: white; color: rgb(66, 69, 74); } QMenu[hide="true"]::right-arrow { }')
         save_menu.addAction('Save all', self.save_all)
         sub_menu = save_menu.addMenu('Save by type')
-        sub_menu.addAction('http/s')
-        sub_menu.addAction('socks4')
-        sub_menu.addAction('socks5')
+        sub_menu.addAction('http/s', self.save_http)
+        sub_menu.addAction('socks4', self.save_socks4)
+        sub_menu.addAction('socks5', self.save_socks5)
         save_menu.addAction('Save by country', self.save_by_country)
         self.save_checker_btn.setMenu(save_menu)
+
+    def save_http(self):
+        file_name = QFileDialog.getSaveFileName(self, f'Proxier - Save Http/s')
+        if file_name[0] != '':
+            with open(file_name[0], 'w') as file_:
+                for type_ in self.proxies_checker['types']:
+                    if type_ == 'http':
+                        for hit in self.proxies_checker['types'][type_]:
+                            file_.write(f'{hit}\n')
+                file_.close()
+
+    def save_socks4(self):
+        file_name = QFileDialog.getSaveFileName(self, f'Proxier - Save Http/s')
+        if file_name[0] != '':
+            with open(file_name[0], 'w') as file_:
+                for type_ in self.proxies_checker['types']:
+                    if type_ == 'socks4':
+                        for hit in self.proxies_checker['types'][type_]:
+                            file_.write(f'{hit}\n')
+                file_.close()
+
+    def save_socks5(self):
+        file_name = QFileDialog.getSaveFileName(self, f'Proxier - Save Http/s')
+        if file_name[0] != '':
+            with open(file_name[0], 'w') as file_:
+                for type_ in self.proxies_checker['types']:
+                    if type_ == 'socks5':
+                        for hit in self.proxies_checker['types'][type_]:
+                            file_.write(f'{hit}\n')
+                file_.close()
 
     def save_by_country(self):
         countries = []
@@ -98,6 +145,9 @@ class Proxier(QMainWindow, ui):
             with open(file_name[0], 'w') as file_:
                 for country in self.proxies_checker['countries']:
                     for hit in self.proxies_checker['countries'][country]:
+                        file_.write(f'{hit}\n')
+                for type_ in self.proxies_checker['types']:
+                    for hit in self.proxies_checker['types'][type_]:
                         file_.write(f'{hit}\n')
                 file_.close()
 
@@ -219,12 +269,16 @@ class Proxier(QMainWindow, ui):
                 self.proxies_checker_table.insertRow(row)
                 self.proxies_checker_table.setItem(row, 0, QTableWidgetItem(value['address']))
                 self.proxies_checker_table.setItem(row, 1, QTableWidgetItem(value['port']))
-                item = QTableWidgetItem()
+                item = QTableWidgetItem(value['type'])
                 item.setSizeHint(QSize(0, 0))
                 city = str(value['city']).replace(' ', '-')
                 if city not in self.proxies_checker['countries']: 
                     self.proxies_checker['countries'][city] = []
-                self.proxies_checker['countries'][city].append(value['address'] + ':' + value['port'])
+                self.proxies_checker['countries'][city].append('{}:{}'.format(value['address'], value['port']))
+                type_ = value['type']
+                if type_ not in self.proxies_checker['types']:
+                    self.proxies_checker['types'][type_] = []
+                self.proxies_checker['types'][type_].append('{}:{}'.format(value['address'], value['port']))
                 item.setIcon(QIcon(f'assets/ico/{city}-Flag.ico'))
                 self.proxies_checker_table.setItem(row, 2, item)
                 self.proxies_checker_table.setItem(row, 3, QTableWidgetItem(value['ms'] + 'ms'))

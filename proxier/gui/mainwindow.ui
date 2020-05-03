@@ -204,7 +204,7 @@ QPushButton::menu-indicator{width:0px;}
 }</string>
       </property>
       <property name="text">
-       <string>http://www.163.com  (disabled)</string>
+       <string>http://www.163.com</string>
       </property>
      </widget>
      <widget class="QPushButton" name="clear_checker_btn">
