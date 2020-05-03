@@ -2,11 +2,11 @@
 ![qt](https://img.shields.io/badge/PyQt-v5-red)
 # Proxier
 Fast and easy-to-use proxy tool powered by python.
-
 Compatible with macOS, windows, linux.
-1. > git clone https://github.com/Marklab9/Proxier.git
-1. Activate virtual environment (venv)
-1. > python main.py
+
+> git clone https://github.com/Marklab9/Proxier.git
+Activate virtual environment (venv)
+> python main.py
 
 ## Checker
 Checking a lot of proxies quickly with 250 standard workers
