@@ -1,7 +1,15 @@
-import requests, re, threading, os, zipfile, socket, struct
 from bs4 import BeautifulSoup
 from multiprocessing.dummy import Pool
 from requests.exceptions import *
+import requests
+import re
+import threading
+import os
+import zipfile
+import socket
+import struct
+import time
+import geoip2.database as geoip
 
 
 HEADERS = {

@@ -1,13 +1,13 @@
 
-from utils.__init__ import *
+from proxier.utils import *
 
 
 class Fetcher:
 
     def __init__(self, proxy_sites):
         self.PROXY_SITES = proxy_sites
-        self.PATTERN = r'(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3}):(\d{1,5})'
-        self.FILE_NAME = 'proxy.zip'
+        self.PATTERN     = r'(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3}):(\d{1,5})'
+        self.FILE_NAME   = 'proxy.zip'
 
     def get_proxies_sites(self):
         return self.PROXY_SITES

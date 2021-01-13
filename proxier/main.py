@@ -1,7 +1,11 @@
-from __init__ import *
-from table import *
+from proxier import *
+from proxier.table import (
+    CheckProxies, 
+    FetchProxies
+)
 
-ui, _ = loadUiType('gui/mainwindow.ui')
+
+ui, _ = loadUiType('proxier/gui/mainwindow.ui')
 
 class Proxier(QMainWindow, ui):
 
@@ -10,7 +14,6 @@ class Proxier(QMainWindow, ui):
         QMainWindow.__init__(self)
         self.setupUi(self)
         self.init_UI()
-        self.toast = ToastNotifier()
         self.proxies_leecher = []
         self.proxies_checker = {'list': [], 'countries': {}, 'types': {}}
         # starting handling...
@@ -43,7 +46,7 @@ class Proxier(QMainWindow, ui):
         for site in self.link_fetch_text.toPlainText().split('\n'):
             if site != '': proxy_sites.append(site)
         self.fetch_proxies = FetchProxies(proxy_sites, self)
-        self.fetch_proxies.proxyChanged.connect(self.on_proxy_changed)
+        self.fetch_proxies.statusChanged.connect(self.on_proxy_fetched)
         # CHECKER THREAD
         self.check_proxies = CheckProxies(self.proxies_checker['list'], self.site_checker_line.text(), self)
         self.check_proxies.statusChanged.connect(self.on_proxy_checked)
@@ -223,7 +226,7 @@ class Proxier(QMainWindow, ui):
             self.check_proxies.suspend()
             self.start_checker_btn.setText('RESUME')
 
-    def on_proxy_changed(self, value):
+    def on_proxy_fetched(self, value):
         status = value['status']
         if not status:
             errors = self.errors_fetch_lbl.text().split('">')[1].split('</')[0]
@@ -245,10 +248,10 @@ class Proxier(QMainWindow, ui):
                 self.source_fetch_lbl.setText(f'<span style=" font-weight:600; color:#ffffff;">Leeched {len(self.proxies_leecher)} proxies!</span>')
                 self.clear_fetch_btn.setDisabled(False)
                 self.start_fetch_btn.setText('START')
-                try:
-                    self.toast.show_toast('Proxier', f'Leeched {len(self.proxies_leecher)} proxies!', duration=2, icon_path='assets/favicon.ico', threaded=True)
-                except:
-                    pass
+                #try:
+                #    self.toast.show_toast('Proxier', f'Leeched {len(self.proxies_leecher)} proxies!', duration=2, icon_path='assets/favicon.ico', threaded=True)
+                #except:
+                #    pass
 
     def on_proxy_checked(self, value):
         if value['status']:
@@ -257,10 +260,10 @@ class Proxier(QMainWindow, ui):
                 self.errors_checker_lbl.setText(f'<span style="font-size:10pt; font-weight:600; color:#ff3c0b;">{int(errors) + 1}</span>')                    
             elif value['status'] == 'end':
                 self.start_checker_btn.setText('START')
-                try:
-                    self.toast.show_toast('Proxier', f'Proxies checked!', duration=10, icon_path='assets/favicon.ico', threaded=True)
-                except:
-                    pass
+                #try:
+                #    self.toast.show_toast('Proxier', f'Proxies checked!', duration=10, icon_path='assets/favicon.ico', threaded=True)
+                #except:
+                #    pass
                 self.source_checker_lbl.setText('<span style=" font-weight:600; color:#ffffff;">Finished</span>')
                 self.clear_checker_btn.setDisabled(False)
                 self.addlist_checker_btn.setDisabled(False)
@@ -300,8 +303,4 @@ def main():
     window = Proxier()
     window.show()
     app.exec_()
-
-if __name__ == '__main__':
-    main()
-
 
