@@ -34,6 +34,7 @@ PyQt5 = "==5.14.2"
 PyQt5-sip = "==12.7.2"
 pyqt = "*"
 pyside2 = "*"
+notify-py = "*"
 
 [requires]
 python_version = "3.7"

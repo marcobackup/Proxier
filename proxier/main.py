@@ -14,6 +14,11 @@ class Proxier(QMainWindow, ui):
         QMainWindow.__init__(self)
         self.setupUi(self)
         self.init_UI()
+        self.notification    = Notify(
+            default_application_name='Proxier',
+            default_notification_icon='proxier/assets/icon.png',
+            default_notification_audio='proxier/assets/sound/notify.wav'
+        )
         self.proxies_leecher = []
         self.proxies_checker = {'list': [], 'countries': {}, 'types': {}}
         # starting handling...
@@ -23,12 +28,19 @@ class Proxier(QMainWindow, ui):
         starting app...
     """
     def init_UI(self):
-        self.proxies_fetch_table.horizontalHeader().hide()
-        self.proxies_fetch_table.verticalHeader().hide()
-        self.proxies_checker_table.horizontalHeader().hide()
-        self.proxies_checker_table.verticalHeader().hide()
-        self.proxies_checker_table.setIconSize(QSize(20, 20))
+        fetcher_table_horizontal_header = self.proxies_fetch_table.horizontalHeader()
+        fetcher_table_vertical_header   = self.proxies_fetch_table.verticalHeader()
+        checker_table_horizontal_header = self.proxies_checker_table.horizontalHeader()
+        checker_table_vertical_header   = self.proxies_checker_table.verticalHeader()
+        # hide table headers
+        fetcher_table_horizontal_header.hide()
+        fetcher_table_vertical_header.hide()
+        checker_table_horizontal_header.hide()
+        checker_table_vertical_header.hide()
 
+        fetcher_table_horizontal_header.setSectionResizeMode(2, QHeaderView.Stretch)
+        checker_table_horizontal_header.setSectionResizeMode(0, QHeaderView.Stretch)
+        self.proxies_checker_table.setIconSize(QSize(20, 20))
 
     """
         buttons handler
@@ -248,10 +260,11 @@ class Proxier(QMainWindow, ui):
                 self.source_fetch_lbl.setText(f'<span style=" font-weight:600; color:#ffffff;">Leeched {len(self.proxies_leecher)} proxies!</span>')
                 self.clear_fetch_btn.setDisabled(False)
                 self.start_fetch_btn.setText('START')
-                #try:
-                #    self.toast.show_toast('Proxier', f'Leeched {len(self.proxies_leecher)} proxies!', duration=2, icon_path='assets/favicon.ico', threaded=True)
-                #except:
-                #    pass
+                # notification
+                self.notification.title   = 'Leech completed!'
+                self.notification.message = f'Leeched {len(self.proxies_leecher)} proxies with success!'
+                self.notification.send(block=False)
+
 
     def on_proxy_checked(self, value):
         if value['status']:
@@ -260,10 +273,11 @@ class Proxier(QMainWindow, ui):
                 self.errors_checker_lbl.setText(f'<span style="font-size:10pt; font-weight:600; color:#ff3c0b;">{int(errors) + 1}</span>')                    
             elif value['status'] == 'end':
                 self.start_checker_btn.setText('START')
-                #try:
-                #    self.toast.show_toast('Proxier', f'Proxies checked!', duration=10, icon_path='assets/favicon.ico', threaded=True)
-                #except:
-                #    pass
+                # notification
+                self.notification.title   = 'Check completed!'
+                self.notification.message = 'Proxies checked with success!'
+                self.notification.send(block=False)
+
                 self.source_checker_lbl.setText('<span style=" font-weight:600; color:#ffffff;">Finished</span>')
                 self.clear_checker_btn.setDisabled(False)
                 self.addlist_checker_btn.setDisabled(False)
@@ -282,19 +296,19 @@ class Proxier(QMainWindow, ui):
                 if type_ not in self.proxies_checker['types']:
                     self.proxies_checker['types'][type_] = []
                 self.proxies_checker['types'][type_].append('{}:{}'.format(value['address'], value['port']))
-                item.setIcon(QIcon(f'assets/ico/{city}-Flag.ico'))
+                item.setIcon(QIcon(f'proxier/assets/ico/{city}-Flag.ico'))
                 self.proxies_checker_table.setItem(row, 2, item)
                 self.proxies_checker_table.setItem(row, 3, QTableWidgetItem(value['ms'] + 'ms'))
                 hits = self.hits_checker_lbl.text().split('">')[1].split('</')[0]
-                self.hits_checker_lbl.setText(f'<span style="font-size:10pt; font-weight:600; color:#2cff21;">{int(hits) + 1}</span>')            
+                self.hits_checker_lbl.setText(f'<span style="font-size:13pt; font-weight:600; color:#2cff21;">{int(hits) + 1}</span>')            
         else:
             bad = self.bad_checker_lbl.text().split('">')[1].split('</')[0]
-            self.bad_checker_lbl.setText(f'<span style="font-size:10pt; font-weight:600; color:#ff3c0b;">{int(bad) + 1}</span>')
+            self.bad_checker_lbl.setText(f'<span style="font-size:13pt; font-weight:600; color:#ff3c0b;">{int(bad) + 1}</span>')
         if value['status'] != 'end':
             checked = self.checked_checker_lbl.text().split('">')[1].split('</')[0]
-            self.checked_checker_lbl.setText(f'<span style="font-size:10pt; font-weight:600; color:#ffffff;">{int(checked) + 1}</span>')
+            self.checked_checker_lbl.setText(f'<span style="font-size:13pt; font-weight:600; color:#ffffff;">{int(checked) + 1}</span>')
             proxies = self.proxies_checker_lbl.text().split('">')[1].split('</')[0]
-            self.proxies_checker_lbl.setText(f'<span style="font-size:10pt; font-weight:600; color:#ffffff;">{int(proxies) - 1}</span>')
+            self.proxies_checker_lbl.setText(f'<span style="font-size:13pt; font-weight:600; color:#ffffff;">{int(proxies) - 1}</span>')
 
 
 
