@@ -300,6 +300,7 @@ class Proxier(QMainWindow, ui):
 
 def main():
     app = QApplication([])
+    app.setWindowIcon(QIcon('proxier/assets/icon.png'))
     window = Proxier()
     window.show()
     app.exec_()
