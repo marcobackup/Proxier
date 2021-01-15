@@ -1,6 +1,4 @@
-![python](https://img.shields.io/badge/python-v3.7-yellow)
-![qt](https://img.shields.io/badge/PyQt-v5-red)
-
+![Python Version][python-shield]  ![Contributors][contributors-shield]  ![Stargazers][stars-shield]  ![Issues][issues-shield]  ![MIT License][license-shield]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -14,11 +12,18 @@
   <p align="center">
     Fast and easy-to-use proxy tool powered by python. 🐍.  (v2.0)
     <br />
-    <a href="https://github.com/Marklab9/Proxier"><strong>Explore the docs »</strong></a>
-    <br />
     <br />
     <a href="https://github.com/Marklab9/Proxier/issues">Report Bug</a>
     ·
     <a href="https://github.com/Marklab9/Proxier/issues">Request Feature</a>
   </p>
 </p>
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/marklab9/proxier?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/marklab9/proxier?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/marklab9/proxier?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/marklab9/proxier?style=for-the-badge
+[python-shield]: https://img.shields.io/github/pipenv/locked/python-version/marklab9/proxier?style=for-the-badge
