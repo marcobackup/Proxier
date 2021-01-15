@@ -14,6 +14,7 @@ class Proxier(QMainWindow, ui):
         QMainWindow.__init__(self)
         self.setupUi(self)
         self.init_UI()
+        QMessageBox(QMessageBox.Warning, 'Proxier v2.0-beta',  'This is a BETA version, something could go wrong!').exec_()
         self.notification    = Notify(
             default_notification_icon='proxier/assets/icon.png',
             default_notification_audio='proxier/assets/sound/notify.wav'
@@ -59,7 +60,8 @@ class Proxier(QMainWindow, ui):
         self.fetch_proxies = FetchProxies(proxy_sites, self)
         self.fetch_proxies.statusChanged.connect(self.on_proxy_fetched)
         # CHECKER THREAD
-        self.check_proxies = CheckProxies(self.proxies_checker['list'], self.site_checker_line.text(), self)
+        site = self.site_checker_line.text()
+        self.check_proxies = CheckProxies(self.proxies_checker['list'], site, self)
         self.check_proxies.statusChanged.connect(self.on_proxy_checked)
 
     def open_github_repo(self):
