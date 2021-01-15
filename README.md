@@ -16,6 +16,8 @@
     <a href="https://github.com/Marklab9/Proxier/issues">Report Bug</a>
     ·
     <a href="https://github.com/Marklab9/Proxier/issues">Request Feature</a>
+    ·
+    <a href="https://github.com/Marklab9/Proxier/releases/download/v2.0/Proxier.rar">Executable</a>
   </p>
 </p>
 
