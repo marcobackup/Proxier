@@ -1,4 +1,3 @@
-
 from proxier.utils import *
 
 
@@ -62,7 +61,7 @@ class Fetcher:
             {'token': token_id}
         )
 
-        if temp_result[0].status_code == requests.codes.ok:
+        if swap_result[0].status_code == requests.codes.ok:
             swap_result = []
             self.worker(
                 f'https://workupload.com/api/file/getDownloadServer/{download_id}',
@@ -114,7 +113,7 @@ class Fetcher:
                         else:
                             post = requests.get(post).text
                             download_id = post.split('="https://workupload.com/')[1].split('" ')[0].split('/')[1]
-                
+
                             for _ in self.workupload_downloader(download_id):
                 
                                 with open(self.FILE_NAME, 'wb') as zip_file:
@@ -123,7 +122,7 @@ class Fetcher:
                                     archive = zipfile.ZipFile('proxy.zip')
                 
                                     for _ in archive.namelist():
-                
+
                                         if '.txt' in _:
                                             fetched = re.findall(self.PATTERN, archive.read(_).decode())
                 

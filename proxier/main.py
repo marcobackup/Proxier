@@ -15,7 +15,6 @@ class Proxier(QMainWindow, ui):
         self.setupUi(self)
         self.init_UI()
         self.notification    = Notify(
-            default_application_name='Proxier',
             default_notification_icon='proxier/assets/icon.png',
             default_notification_audio='proxier/assets/sound/notify.wav'
         )
@@ -179,7 +178,7 @@ class Proxier(QMainWindow, ui):
             if proxy not in self.proxies_checker['list']:
                 self.proxies_checker['list'].append(proxy)
                 hits = self.proxies_checker_lbl.text().split('">')[1].split('</')[0]
-                self.proxies_checker_lbl.setText(f'<span style=" font-size:10pt; font-weight:600; color:#ffffff;">{int(hits) + 1}</span>')
+                self.proxies_checker_lbl.setText(f'<span style=" font-size:11pt; font-weight:600; color:#ffffff;">{int(hits) + 1}</span>')
 
     def import_proxies_file(self):
         file_name = QFileDialog.getOpenFileName(self, 'Proxier - Import List')
@@ -191,7 +190,7 @@ class Proxier(QMainWindow, ui):
                     if proxy not in self.proxies_checker['list']:
                         self.proxies_checker['list'].append(proxy)
                         hits = self.proxies_checker_lbl.text().split('">')[1].split('</')[0]
-                        self.proxies_checker_lbl.setText(f'<span style=" font-size:10pt; font-weight:600; color:#ffffff;">{int(hits) + 1}</span>')
+                        self.proxies_checker_lbl.setText(f'<span style=" font-size:11pt; font-weight:600; color:#ffffff;">{int(hits) + 1}</span>')
 
     def save_hits(self):
         file_name = QFileDialog.getSaveFileName(self, 'Proxier - Save Hits')
@@ -300,15 +299,15 @@ class Proxier(QMainWindow, ui):
                 self.proxies_checker_table.setItem(row, 2, item)
                 self.proxies_checker_table.setItem(row, 3, QTableWidgetItem(value['ms'] + 'ms'))
                 hits = self.hits_checker_lbl.text().split('">')[1].split('</')[0]
-                self.hits_checker_lbl.setText(f'<span style="font-size:13pt; font-weight:600; color:#2cff21;">{int(hits) + 1}</span>')            
+                self.hits_checker_lbl.setText(f'<span style="font-size:11pt; font-weight:600; color:#2cff21;">{int(hits) + 1}</span>')            
         else:
             bad = self.bad_checker_lbl.text().split('">')[1].split('</')[0]
-            self.bad_checker_lbl.setText(f'<span style="font-size:13pt; font-weight:600; color:#ff3c0b;">{int(bad) + 1}</span>')
+            self.bad_checker_lbl.setText(f'<span style="font-size:11pt; font-weight:600; color:#ff3c0b;">{int(bad) + 1}</span>')
         if value['status'] != 'end':
             checked = self.checked_checker_lbl.text().split('">')[1].split('</')[0]
-            self.checked_checker_lbl.setText(f'<span style="font-size:13pt; font-weight:600; color:#ffffff;">{int(checked) + 1}</span>')
+            self.checked_checker_lbl.setText(f'<span style="font-size:11pt; font-weight:600; color:#ffffff;">{int(checked) + 1}</span>')
             proxies = self.proxies_checker_lbl.text().split('">')[1].split('</')[0]
-            self.proxies_checker_lbl.setText(f'<span style="font-size:13pt; font-weight:600; color:#ffffff;">{int(proxies) - 1}</span>')
+            self.proxies_checker_lbl.setText(f'<span style="font-size:11pt; font-weight:600; color:#ffffff;">{int(proxies) - 1}</span>')
 
 
 
