@@ -14,8 +14,6 @@
   <p align="center">
     Fast and easy-to-use proxy tool powered by python. 🐍.  (v2.0)
     <br />
-    <a href="https://github.com/Marklab9/Proxier"><strong>Explore the docs »</strong></a>
-    <br />
     <br />
     <a href="https://github.com/Marklab9/Proxier/issues">Report Bug</a>
     ·
