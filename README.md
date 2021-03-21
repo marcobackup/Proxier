@@ -4,9 +4,9 @@
 <br />
 <br />
 <p align="center">
-  <a href="https://github.com/Marklab9/Proxier">
-    <img src="https://png2.cleanpng.com/sh/dde88c51459760cefa0fb1eaf82f8961/L0KzQYm3VcE5N5pvjJH0aYP2gLBuTgJmfpZ3i9c2cILyiMq0kQJwgKoyi9d7dnX1Pbn7lQB0NZ10edY2YnHvcbBqif5oNZlmRadqZna3QofrUMg4PGc1RqIBOES4SIaBUcUzPmc8UKM7NUC2RIe1kP5o/kisspng-reverse-proxy-proxy-server-https-load-balancing-ha-5aff426d087460.0684585815266781250346.png" alt="Logo" width="80" height="80">
-  </a>
+  <!--<a href="https://github.com/Marklab9/Proxier">-->
+    <img src="https://bobbyiliev.com/storage/posts/April2019/bobby-proxy-reverse-apache.png" alt="Logo" width="80" height="80">
+  <!--</a>-->
 
   <h3 align="center">Proxier</h3>
 
