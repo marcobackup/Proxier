@@ -5,7 +5,7 @@
 <br />
 <p align="center">
   <!--<a href="https://github.com/Marklab9/Proxier">-->
-    <img src="https://bobbyiliev.com/storage/posts/April2019/bobby-proxy-reverse-apache.png" alt="Logo" width="80" height="80">
+    <img src="https://github.com/marcobackup/Proxier/blob/master/proxier/assets/icon.png?raw=true" alt="Logo" width="80" height="80">
   <!--</a>-->
 
   <h3 align="center">Proxier</h3>
